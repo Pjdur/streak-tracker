@@ -1,6 +1,7 @@
 import datetime
 import json
 import os
+import argparse
 
 DATA_FILE = "streak.json"
 
@@ -77,5 +78,29 @@ def check_in():
     print("\n📅 This week’s streak:")
     print_weekly_line(data["history"])
 
+def show_status():
+    data = load_data()
+    print("=========================")
+    print("   Coding Streak Tracker ")
+    print("=========================")
+    print(f"🔥 Current streak: {data['streak']} days")
+    print(f"🏆 Longest streak: {data['longest']} days")
+    print("\n📅 This week’s streak:")
+    print_weekly_line(data["history"])
+
+def main():
+    parser = argparse.ArgumentParser(description="Coding Streak Tracker")
+    parser.add_argument("action", choices=["checkin", "status", "week"], nargs="?", default="checkin",
+                        help="Choose an action: checkin, status, or week")
+    args = parser.parse_args()
+
+    if args.action == "checkin":
+        check_in()
+    elif args.action == "status":
+        show_status()
+    elif args.action == "week":
+        data = load_data()
+        print_weekly_line(data["history"])
+
 if __name__ == "__main__":
-    check_in()
+    main()
