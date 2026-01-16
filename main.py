@@ -5,7 +5,7 @@ import argparse
 
 # Save streak.json in the user's home directory
 HOME_DIR = os.path.expanduser("~")
-DATA_FILE = os.path.join(HOME_DIR, ".streak.json")
+DATA_FILE = os.path.join(HOME_DIR, "streak.json")
 
 BADGES = {
     7: "🥉 7-day streak badge unlocked!",
