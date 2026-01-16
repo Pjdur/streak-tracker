@@ -88,10 +88,23 @@ def show_status():
     print("\n📅 This week’s streak:")
     print_weekly_line(data["history"])
 
+def show_history():
+    data = load_data()
+    print("=========================")
+    print("   Coding Streak Tracker ")
+    print("=========================")
+    print("📜 Check-in history:")
+
+    if not data["history"]:
+        print("No check-ins yet.")
+    else:
+        for date in data["history"]:
+            print(date)
+
 def main():
     parser = argparse.ArgumentParser(description="Coding Streak Tracker")
-    parser.add_argument("action", choices=["checkin", "status", "week"], nargs="?", default="checkin",
-                        help="Choose an action: checkin, status, or week")
+    parser.add_argument("action", choices=["checkin", "status", "week", "history"], nargs="?", default="checkin",
+                        help="Choose an action: checkin, status, week, or history")
     args = parser.parse_args()
 
     if args.action == "checkin":
@@ -101,6 +114,8 @@ def main():
     elif args.action == "week":
         data = load_data()
         print_weekly_line(data["history"])
+    elif args.action == "history":
+        show_history()
 
 if __name__ == "__main__":
     main()
