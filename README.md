@@ -7,9 +7,7 @@ A coding streak tracker that helps you stay motivated. It tracks your coding str
 Clone the repository and install with Cargo:
 
 ```
-git clone https://github.com/Pjdur/streak-tracker.git
-cd streak-tracker
-cargo install --path .
+cargo install --git https://github.com/Pjdur/streak-tracker.git
 ```
 
 ## Usage
