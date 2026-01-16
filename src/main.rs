@@ -4,6 +4,16 @@ use serde::{Serialize, Deserialize};
 use chrono::prelude::*;
 use clap::Parser;
 
+fn maybe_show_badge(streak: u32) {
+    match streak {
+        7 => println!("🥉 7-day streak badge unlocked!"),
+        30 => println!("🥈 30-day streak badge unlocked!"),
+        100 => println!("🥇 100-day streak badge unlocked!"),
+        365 => println!("🏆 1-year streak badge unlocked!"),
+        _ => {}
+    }
+}
+
 fn data_file_path() -> PathBuf {
     let mut home = dirs::home_dir().expect("Could not find home directory");
     home.push("streak.json");
@@ -76,7 +86,7 @@ fn checkin() -> Result<(), Box<dyn std::error::Error>> {
     println!("✅ Checked in for {}", today);
     println!("🔥 Current streak: {} days", data.streak);
     println!("🏆 Longest streak: {} days", data.longest);
-
+    maybe_show_badge(data.streak);
     Ok(())
 }
 
