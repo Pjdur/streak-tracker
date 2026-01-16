@@ -3,7 +3,9 @@ import json
 import os
 import argparse
 
-DATA_FILE = "streak.json"
+# Save streak.json in the user's home directory
+HOME_DIR = os.path.expanduser("~")
+DATA_FILE = os.path.join(HOME_DIR, ".streak.json")
 
 BADGES = {
     7: "🥉 7-day streak badge unlocked!",
@@ -17,7 +19,10 @@ def load_data():
         with open(DATA_FILE, "r") as f:
             return json.load(f)
     else:
-        return {"streak": 0, "longest": 0, "last_date": None, "history": []}
+        # Create the file with default data if it doesn't exist
+        data = {"streak": 0, "longest": 0, "last_date": None, "history": []}
+        save_data(data)
+        return data
 
 def save_data(data):
     with open(DATA_FILE, "w") as f:
